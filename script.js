@@ -11,6 +11,13 @@ const sauces = [
   {name:'간장', unit:'큰술', quantity:0.5},
   {name:'설탕', unit:'작은술', quantity:0.5},
 ];
+const alternativeSauces = [
+  {name:'케첩', unit:'큰술', quantity:1},
+  {name:'굴소스', unit:'큰술', quantity:0.5},
+  {name:'간장', unit:'큰술', quantity:0.5},
+  {name:'설탕', unit:'작은술', quantity:0.5},
+  {name:'식초 (선택)', unit:'작은술', quantity:0.5},
+];
 let servings = 1;
 const checked = new Set();
 function amount(item) {
@@ -26,6 +33,7 @@ function render() {
   document.querySelector('#plus').disabled = servings === 8;
   document.querySelector('#ingredient-items').innerHTML = ingredients.map((item, index) => `<label class="ingredient"><input type="checkbox" data-index="${index}" ${checked.has(index) ? 'checked' : ''}><span class="ingredient-name">${item.name}</span><span class="amount">${amount(item)}</span></label>`).join('');
   document.querySelector('#sauce-items').innerHTML = sauces.map(item => `<div><dt>${item.name}</dt><dd>${amount(item)}</dd></div>`).join('');
+  document.querySelector('#alternative-sauce-items').innerHTML = alternativeSauces.map(item => `<div><dt>${item.name}</dt><dd>${amount(item)}</dd></div>`).join('');
 }
 document.querySelector('#minus').addEventListener('click', () => { if (servings > 1) { servings--; render(); } });
 document.querySelector('#plus').addEventListener('click', () => { if (servings < 8) { servings++; render(); } });
